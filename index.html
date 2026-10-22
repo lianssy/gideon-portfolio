@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070910">
+  <meta name="description" content="Gideon is a local AI assistant project with persistent memory, saved conversations, projects, tasks, and a midnight terminal interface.">
+  <title>GIDEON — Personal Intelligence, Locally</title>
+  <style>
+    :root{color-scheme:dark;--bg:#070910;--panel:#0c111d;--panel2:#111827;--line:#283349;--white:#eef2f8;--muted:#9aa8bf;--silver:#dce3ef;--blue:#9eafd0;--max:1160px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 7% 13%,#dbe6ff 0.8px,transparent 1.3px),radial-gradient(circle at 22% 71%,#aebdd8 .7px,transparent 1.3px),radial-gradient(circle at 47% 28%,#cbd8f2 .8px,transparent 1.4px),radial-gradient(circle at 78% 19%,#b5c2dc .7px,transparent 1.3px),radial-gradient(circle at 90% 62%,#bdc9e1 .8px,transparent 1.4px),radial-gradient(circle at 61% 87%,#cbd8f2 .7px,transparent 1.3px),linear-gradient(145deg,#101725 0%,#070910 52%,#05070c 100%);background-size:227px 241px,313px 293px,281px 311px,349px 257px,271px 307px,331px 281px,auto}
+    a{color:inherit}a:focus-visible,button:focus-visible{outline:2px solid #c7d4ee;outline-offset:4px}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.topbar{position:sticky;top:0;z-index:10;background:rgba(7,9,16,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(78,94,121,.26)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-size:13px;font-weight:800;letter-spacing:.34em}.sigil{width:34px;height:34px;border:1px solid #687895;border-radius:9px;display:grid;place-items:center;color:#e4eaf5;font-size:17px;background:linear-gradient(145deg,#1a2232,#0c1019);box-shadow:inset 0 1px rgba(255,255,255,.08)}.navlinks{display:flex;align-items:center;gap:27px}.navlinks a{text-decoration:none;color:var(--muted);font-size:13px;transition:color .18s}.navlinks a:hover{color:var(--white)}.navlinks .nav-cta{padding:10px 15px;border:1px solid #c4cedf;border-radius:8px;background:var(--silver);color:#080b13;font-weight:750}
+    .hero{padding:84px 0 72px;display:grid;grid-template-columns:1fr .96fr;align-items:center;gap:60px;min-height:610px}.eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid #29354b;background:rgba(14,20,33,.78);border-radius:99px;padding:7px 12px;color:#bac7de;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:#a7c3ae;box-shadow:0 0 13px rgba(167,195,174,.65)}h1{font-size:clamp(46px,6vw,82px);line-height:.98;letter-spacing:-.065em;margin:25px 0 22px;font-weight:700;max-width:680px}h1 .soft{display:block;color:#a8b5ca;font-weight:420}.lead{color:#aab6cb;font-size:17px;max-width:520px;line-height:1.8}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;text-decoration:none;padding:13px 18px;border-radius:9px;font-size:13px;font-weight:760;letter-spacing:.02em;border:1px solid #48556d;transition:transform .18s,border-color .18s,background .18s}.btn:hover{transform:translateY(-2px);border-color:#9baac2}.btn-primary{background:linear-gradient(145deg,#eef2f8,#cbd4e3);color:#080b13;border-color:#f1f4f9;box-shadow:0 12px 30px rgba(0,0,0,.22)}.btn-secondary{background:rgba(13,17,27,.7);color:#e3e9f4}.microcopy{font-size:11px;color:#7f8da5;margin-top:17px}.visual{position:relative}.orb{position:absolute;width:320px;height:320px;right:2%;top:10%;border-radius:50%;background:radial-gradient(circle,rgba(151,172,211,.13),rgba(50,69,105,.04) 56%,transparent 70%);filter:blur(9px);z-index:-1}.screen{position:relative;padding:9px;border-radius:15px;border:1px solid #354056;background:linear-gradient(145deg,rgba(32,41,59,.95),rgba(8,11,18,.96));box-shadow:0 32px 90px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.06);transform:perspective(1200px) rotateY(-3deg) rotateX(1deg)}.windowbar{height:28px;display:flex;align-items:center;gap:6px;padding:0 7px}.win-dot{width:6px;height:6px;border-radius:50%;background:#4d5a71}.windowlabel{margin-left:auto;font-size:8px;letter-spacing:.2em;color:#8c9ab2}.screen img{width:100%;display:block;border:1px solid #293348;border-radius:7px}.float-card{position:absolute;right:-18px;bottom:-22px;display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #35425a;background:rgba(12,17,28,.94);backdrop-filter:blur(12px);border-radius:10px;box-shadow:0 15px 40px rgba(0,0,0,.4);font-size:11px;color:#b9c5d9}.float-icon{width:25px;height:25px;border-radius:7px;background:#dce3ef;color:#101521;display:grid;place-items:center;font-size:14px;font-weight:900}.float-card strong{display:block;color:#f0f3f9;font-size:12px}
+    .ticker{border-top:1px solid rgba(68,82,107,.35);border-bottom:1px solid rgba(68,82,107,.35);background:rgba(11,15,24,.6)}.ticker-inner{display:flex;justify-content:space-between;gap:20px;padding:19px 0;color:#8998b1;font-size:10px;letter-spacing:.16em;text-transform:uppercase;flex-wrap:wrap}.ticker span{display:flex;align-items:center;gap:9px}.tiny-spark{color:#dbe3f1}
+    section{scroll-margin-top:85px}.section{padding:92px 0}.section-head{max-width:700px;margin-bottom:35px}.kicker{font-size:10px;letter-spacing:.22em;color:#9bacc8;text-transform:uppercase;font-weight:800}.section h2{font-size:clamp(31px,4vw,48px);line-height:1.12;letter-spacing:-.04em;margin:13px 0 14px}.section-head p{color:var(--muted);margin:0;max-width:640px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{border:1px solid #29344a;background:linear-gradient(145deg,rgba(16,22,35,.88),rgba(9,12,20,.9));border-radius:13px;padding:23px;min-height:205px;transition:transform .2s,border-color .2s}.feature:hover{transform:translateY(-3px);border-color:#52617b}.feature .icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #3a4760;background:#111a29;border-radius:10px;color:#dce5f5;font-size:17px;margin-bottom:20px}.feature h3{font-size:16px;margin:0 0 9px}.feature p{color:#9daac0;font-size:13px;line-height:1.75;margin:0}
+    .split{display:grid;grid-template-columns:.86fr 1.14fr;gap:54px;align-items:start}.manifesto{border-left:2px solid #b9c7df;padding:6px 0 6px 22px;color:#c9d3e4;font-size:19px;line-height:1.65}.manifesto p{margin:0}.specs{display:grid;gap:0;border-top:1px solid #2a3448}.spec-row{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:17px 0;border-bottom:1px solid #2a3448;font-size:13px}.spec-row dt{color:#8998b1}.spec-row dd{margin:0;color:#d9e0ed}.download-section{padding-top:24px}.download-panel{border:1px solid #3b4963;border-radius:17px;overflow:hidden;background:linear-gradient(120deg,rgba(21,29,45,.96),rgba(9,12,20,.96));box-shadow:0 24px 70px rgba(0,0,0,.24)}.download-top{padding:36px 36px 30px;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}.download-top h2{margin:9px 0 12px}.download-top p{color:#a8b5cb;max-width:650px;font-size:14px;margin:0}.status-pill{display:inline-block;border:1px solid #53617a;border-radius:100px;padding:7px 10px;color:#d8e2f4;font-size:10px;letter-spacing:.1em;text-transform:uppercase}.steps{border-top:1px solid #2a354a;display:grid;grid-template-columns:repeat(3,1fr)}.step{padding:24px 26px;border-right:1px solid #2a354a}.step:last-child{border-right:0}.step-num{color:#8fa2c2;font-size:11px;letter-spacing:.14em}.step h3{font-size:14px;margin:12px 0 7px}.step p{font-size:12px;color:#a2afc4;margin:0;line-height:1.75}.step a{color:#dce6f8}.requirements{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}.chip{font-size:11px;color:#b9c5d9;background:#111927;border:1px solid #2c394f;border-radius:7px;padding:6px 9px}.notice{border-top:1px solid #2a354a;background:rgba(5,7,12,.34);padding:17px 36px;color:#a1aec2;font-size:12px;line-height:1.75}.notice strong{color:#e0e7f2}
+    footer{padding:30px 0 42px;border-top:1px solid rgba(68,82,107,.35);margin-top:72px}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;color:#7f8da4;font-size:11px}.footer-brand{color:#d8e1ef;font-weight:800;letter-spacing:.28em}.footer-links{display:flex;gap:17px;flex-wrap:wrap}.footer-links a{color:#9ba9be;text-decoration:none}.footer-links a:hover{color:white}.small-note{font-size:10px;color:#78869d;margin-top:14px}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:42px;padding-top:63px}.hero-copy{max-width:780px}.visual{max-width:800px}.screen{transform:none}.float-card{right:10px}.grid{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr;gap:27px}.download-top{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid #2a354a}.step:last-child{border-bottom:0}}
+    @media(max-width:600px){.wrap{width:min(var(--max),calc(100% - 28px))}.nav{height:66px}.navlinks{gap:13px}.navlinks a:not(.nav-cta){display:none}.navlinks .nav-cta{padding:9px 11px}.hero{padding:54px 0 52px;min-height:0}.lead{font-size:15px}.grid{grid-template-columns:1fr}.feature{min-height:0}.section{padding:69px 0}.download-top{padding:25px 21px 24px}.step{padding:20px 21px}.notice{padding:16px 21px}.spec-row{grid-template-columns:105px 1fr;gap:12px}.footer-inner{align-items:flex-start;flex-direction:column}.ticker-inner{gap:13px}.float-card{position:relative;right:auto;bottom:auto;margin:12px auto 0;width:max-content}.screen{padding:6px}.windowbar{height:24px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Gideon home"><span class="sigil">G</span><span>G I D E O N</span></a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#features">Features</a><a href="#about">About</a><a href="#download">Setup</a>
+        <a class="nav-cta" href="#download">Get the preview <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="dot"></span> Local AI · Windows preview</div>
+        <h1>PERSONAL INTELLIGENCE.<span class="soft">Built to run locally.</span></h1>
+        <p class="lead">Gideon is a personal AI assistant project built around a calm, midnight-terminal interface, saved conversations, persistent memory, and practical workspace tools.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#download">Explore the preview <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-secondary" href="#features">Discover Gideon <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="microcopy">EARLY ACCESS BUILD &nbsp;·&nbsp; WINDOWS &nbsp;·&nbsp; OLLAMA + QWEN REQUIRED</p>
+      </div>
+      <div class="visual" aria-label="Gideon application screenshot">
+        <div class="orb"></div>
+        <div class="screen">
+          <div class="windowbar"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span><span class="windowlabel">GIDEON / LOCAL INSTANCE</span></div>
+          <img src="assets/gideon-app-preview.png" alt="Screenshot of the Gideon interface with a dark starfield, conversation selector, chat panel, and sidebar" loading="eager">
+        </div>
+        <div class="float-card"><span class="float-icon">✓</span><span><strong>Local-first architecture</strong>Local model through Ollama</span></div>
+      </div>
+    </div>
+
+    <div class="ticker"><div class="wrap ticker-inner"><span><b class="tiny-spark">✦</b> Persistent memory</span><span><b class="tiny-spark">✦</b> Conversation archive</span><span><b class="tiny-spark">✦</b> Projects & tasks</span><span><b class="tiny-spark">✦</b> Midnight interface</span></div></div>
+
+    <section id="features" class="section"><div class="wrap">
+      <div class="section-head"><div class="kicker">01 / Capabilities</div><h2>A personal workspace for thinking and building.</h2><p>Gideon is being developed in small, testable steps: useful memory and organization first, with a simple local interface that stays out of the way.</p></div>
+      <div class="grid">
+        <article class="feature"><div class="icon">◈</div><h3>Persistent memory</h3><p>Save specific facts when you explicitly ask Gideon to remember them, then retrieve them in future conversations.</p></article>
+        <article class="feature"><div class="icon">▤</div><h3>Saved conversations</h3><p>Store chat history locally and return to earlier conversations instead of starting from zero each time.</p></article>
+        <article class="feature"><div class="icon">⌘</div><h3>Projects & tasks</h3><p>Create project records, add tasks, list what's in progress, and mark tasks complete.</p></article>
+        <article class="feature"><div class="icon">⌕</div><h3>Read-only file helper</h3><p>Read supported text and code files inside Gideon's project directory when explicitly requested. It does not execute those files.</p></article>
+        <article class="feature"><div class="icon">◎</div><h3>Local model connection</h3><p>Uses Qwen 2.5 7B through Ollama running on the computer, rather than requiring a hosted model API for chat.</p></article>
+        <article class="feature"><div class="icon">✧</div><h3>Midnight terminal UI</h3><p>A black starfield, restrained silver accents, readable chat bubbles, and a focused workspace layout.</p></article>
+      </div>
+    </div></section>
+
+    <section id="about" class="section"><div class="wrap split">
+      <div><div class="kicker">02 / Project notes</div><h2>Designed as a project that can grow.</h2><p style="color:var(--muted);max-width:470px">Gideon began as a personal AI assistant and is being developed into a Windows desktop application. The current preview is a real local app, but it is not yet a self-contained one-click installer.</p></div>
+      <div>
+        <div class="manifesto"><p>“Build the foundation. Make each capability real. Keep the experience consistent.”</p></div>
+        <dl class="specs" style="margin-top:28px">
+          <div class="spec-row"><dt>Model runtime</dt><dd>Ollama · local API</dd></div>
+          <div class="spec-row"><dt>Model</dt><dd>Qwen 2.5 7B</dd></div>
+          <div class="spec-row"><dt>Memory storage</dt><dd>SQLite database on the local machine</dd></div>
+          <div class="spec-row"><dt>Current release</dt><dd>Early-access source preview</dd></div>
+          <div class="spec-row"><dt>Distribution status</dt><dd>Manual setup; installer still in progress</dd></div>
+        </dl>
+      </div>
+    </div></section>
+
+    <section id="download" class="section download-section"><div class="wrap">
+      <div class="download-panel">
+        <div class="download-top">
+          <div><div class="kicker">03 / Get started</div><h2>Try the early-access build.</h2><p>Download the source bundle, set up the required local runtime, and launch Gideon in its own desktop window. This preview is for people comfortable following setup steps.</p><div class="requirements"><span class="chip">Windows 10/11</span><span class="chip">Python 3.14</span><span class="chip">Ollama</span><span class="chip">Qwen download required</span></div></div>
+          <div><a class="btn btn-primary" href="downloads/Gideon-Early-Access-Source.zip" download>Download source preview <span aria-hidden="true">↓</span></a><p style="font-size:10px;color:#8998b1;margin:11px 0 0;text-align:center">ZIP source bundle · Not an installer</p></div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">STEP 01</div><h3>Install the prerequisites</h3><p>Install <a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">Python for Windows</a> and <a href="https://ollama.com/download/windows" target="_blank" rel="noopener">Ollama</a>. During Python setup, enable the Python launcher if offered.</p></div>
+          <div class="step"><div class="step-num">STEP 02</div><h3>Set up the preview</h3><p>Extract the ZIP into a folder you control. Double-click <code>Setup_Gideon.bat</code>. Then open PowerShell in that folder and run <code>ollama pull qwen2.5:7b</code>. The model download is several gigabytes.</p></div>
+          <div class="step"><div class="step-num">STEP 03</div><h3>Launch Gideon</h3><p>After setup and model download finish, double-click <code>Launch_Gideon_Desktop.bat</code>. Keep Ollama installed and running. Your conversation data is stored in the local <code>data</code> folder.</p></div>
+        </div>
+        <div class="notice"><strong>Important:</strong> this early-access package is source code and setup scripts, not a signed installer. It requires Python, Ollama, and the Qwen model. Do not upload your personal database, virtual environment, or private chats when sharing or publishing your own copy. A one-click Windows installer is planned for a later release.</div>
+      </div>
+    </div></section>
+  </main>
+
+  <footer><div class="wrap"><div class="footer-inner"><div><div class="footer-brand">G I D E O N</div><div class="small-note">An independent personal AI project · Early access</div></div><div class="footer-links"><a href="#features">Features</a><a href="#about">About</a><a href="#download">Setup guide</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></div></div><div class="small-note">Model and runtime names belong to their respective projects. Gideon is an independent project and is not affiliated with Python, Ollama, or Qwen.</div></div></footer>
+</body>
+</html>
